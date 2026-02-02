@@ -1,30 +1,19 @@
 package com.example.demo.model;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
-@Getter
-@Setter
 public class Book {
 
     private int id;
     private String title;
     private String author;
 
-    // Constructor không tham số
-    public Book() {
-    }
+    public Book() {}
 
-    // Constructor có tham số
     public Book(int id, String title, String author) {
         this.id = id;
         this.title = title;
         this.author = author;
     }
 
-    // Getter & Setter
     public int getId() {
         return id;
     }

@@ -10,38 +10,33 @@ import java.util.List;
 public class BookService {
 
     private List<Book> books = new ArrayList<>();
+    private int nextId = 1;
 
-    // Lấy danh sách tất cả sách
     public List<Book> getAllBooks() {
         return books;
     }
 
-    // Lấy sách theo id
     public Book getBookById(int id) {
         return books.stream()
-                .filter(book -> book.getId() == id)
+                .filter(b -> b.getId() == id)
                 .findFirst()
                 .orElse(null);
     }
 
-    // Thêm sách
     public void addBook(Book book) {
+        book.setId(nextId++);
         books.add(book);
     }
 
-    // Cập nhật sách
-    public void updateBook(int id, Book updatedBook) {
-        for (Book book : books) {
-            if (book.getId() == id) {
-                book.setTitle(updatedBook.getTitle());
-                book.setAuthor(updatedBook.getAuthor());
-                return;
-            }
+    public void updateBook(int id, Book book) {
+        Book old = getBookById(id);
+        if (old != null) {
+            old.setTitle(book.getTitle());
+            old.setAuthor(book.getAuthor());
         }
     }
 
-    // Xóa sách
     public void deleteBook(int id) {
-        books.removeIf(book -> book.getId() == id);
+        books.removeIf(b -> b.getId() == id);
     }
 }
